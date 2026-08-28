@@ -404,6 +404,21 @@ document.addEventListener('DOMContentLoaded', () => {
         updateAudioHint();
     }, { once: true });
 });
+    // Al abrir una sección en otra pestaña (p. ej. Historia de la Filosofía) esta
+    // página queda en segundo plano pero su música de fondo seguiría sonando y se
+    // mezclaría con el sonido de la otra web. Al perder visibilidad se silencia
+    // aquí (sin tocar el interruptor manual del botón), y al volver a esta
+    // pestaña se reactiva automáticamente si procede, según el mismo criterio de
+    // siempre (respetando si el usuario la había apagado a mano o si hay un
+    // vídeo con sonido activo).
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            if (bgAudio && !bgAudio.paused) bgAudio.pause();
+        } else {
+            syncBgAudio();
+            updateAudioHint();
+        }
+    });
 </script>
 
 </body>
