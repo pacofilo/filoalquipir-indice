@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiales de Filosofía</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Anton&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #EFE3CB;
+            --bg-secondary: #F0EDE6;
+            --bg-card: #FFFFFF;
+            --text-primary: #2D2B28;
+            --text-secondary: #6B6560;
+            --text-tertiary: #9B9590;
+            --accent: #D97757;
+            --accent-light: rgba(217, 119, 87, 0.08);
+            --border: rgba(0, 0, 0, 0.07);
+            --border-hover: rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 3px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-lg: 0 18px 40px rgba(0,0,0,0.14), 0 4px 12px rgba(0,0,0,0.06);
+            --radius: 14px;
+            --radius-sm: 8px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6; min-height: 100vh; font-size: 16px;
+        }
+
+        /* HEADER */
+        .header {
+            background: #3B3226; border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        }
+        .header-inner {
+            max-width: 1280px; margin: 0 auto; padding: 18px 20px;
+            display: flex; align-items: center; justify-content: center; gap: 14px;
+            flex-wrap: wrap; row-gap: 8px;
+        }
+        .logo-area { display: flex; align-items: center; gap: 14px; }
+        .logo-icon {
+            width: 44px; height: 44px; background: var(--accent);
+            border-radius: 12px; display: flex; align-items: center;
+            justify-content: center; color: white; font-weight: 700; font-size: 19px; flex-shrink: 0;
+        }
+        .logo-text {
+            font-family: 'Anton', 'Arial Narrow', sans-serif; font-style: normal; font-weight: 400;
+            text-transform: uppercase; letter-spacing: 0.01em;
+            font-size: clamp(24px, 4.2vw, 44px); line-height: 1;
+            white-space: nowrap;
+        }
+        .logo-text .lt-red { color: #C6503E; }
+        .logo-text .lt-gold { color: #EFA43E; margin-left: 0.28em; }
+        .logo-sub {
+            font-family: 'DM Sans', sans-serif; font-weight: 500; text-transform: uppercase;
+            font-size: clamp(11px, 1.3vw, 14px); letter-spacing: 0.14em; color: rgba(255,255,255,0.55);
+            border-left: 1px solid rgba(255,255,255,0.25); padding-left: 14px; white-space: nowrap;
+        }
+        .header-video {
+            position: absolute; left: 24px; top: -18px; z-index: 3;
+            width: 104px; height: 172px; border-radius: 14px; overflow: hidden;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.35), 0 3px 8px rgba(0,0,0,0.25);
+            border: 2px solid rgba(255,255,255,0.15);
+        }
+        .header-video video { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+        @media (max-width: 640px) {
+            .header-video { position: static; margin: 0 auto 12px; width: 84px; height: 138px; }
+        }
+
+        .header-right {
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%); z-index: 4;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .header-logo-badge {
+            background: #fff; border-radius: 10px; padding: 5px 9px; height: 40px;
+            display: flex; align-items: center; box-shadow: 0 3px 10px rgba(0,0,0,0.28);
+        }
+        .header-logo-badge img { height: 100%; width: auto; display: block; }
+        .header-logo-badge--alquipir { height: 64px; padding: 6px 10px; }
+        .bg-audio-btn {
+            width: 40px; height: 40px; border-radius: 50%; border: none; flex-shrink: 0;
+            background: rgba(255,255,255,0.12); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-size: 17px; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .bg-audio-btn:hover { background: rgba(255,255,255,0.22); transform: scale(1.08); }
+        @media (max-width: 640px) {
+            .header-right { position: relative; top: auto; right: auto; transform: none; margin: 10px auto 0; justify-content: center; }
+            .header-logo-badge { height: 32px; padding: 4px 7px; }
+            .header-logo-badge--alquipir { height: 48px; }
+            .bg-audio-btn { width: 32px; height: 32px; font-size: 14px; }
+        }
+
+        .audio-hint {
+            position: absolute; top: 100%; right: 0; margin-top: 12px; z-index: 200;
+            background: rgba(45,43,40,0.92); color: #fff; padding: 10px 20px; border-radius: 24px;
+            font-size: 13px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            opacity: 0; pointer-events: none; white-space: nowrap;
+            transform: translateY(-6px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .audio-hint.show { opacity: 1; transform: translateY(0); }
+        @media (max-width: 640px) {
+            .audio-hint { right: 50%; transform: translateX(50%) translateY(-6px); }
+            .audio-hint.show { transform: translateX(50%) translateY(0); }
+        }
+        @media (max-width: 480px) {
+            .audio-hint { font-size: 12px; padding: 9px 16px; white-space: normal; text-align: center; max-width: 80vw; }
+        }
+
+        /* MAIN */
+        .main { max-width: 1200px; margin: 0 auto; padding: 56px 20px 90px; }
+
+        /* GRID — 4 grandes secciones, 2x2 */
+        .hub-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
+        }
+
+        /* HUB CARD */
+        .hub-card {
+            display: block; text-decoration: none; color: inherit;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+            overflow: hidden; transition: all 0.28s ease; position: relative;
+            box-shadow: var(--shadow-md);
+        }
+        a.hub-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--border-hover); }
+        .hub-card.is-pending { cursor: default; }
+
+        .hub-card-head { padding: 26px 30px 18px; text-align: center; }
+        .hub-card-title {
+            font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400;
+            font-size: clamp(24px, 2.6vw, 34px); line-height: 1.18; letter-spacing: -0.01em;
+            color: var(--section-color, var(--accent));
+        }
+        .hub-card-title small { display: block; font-family: 'DM Sans', sans-serif; font-style: normal;
+            font-size: 14px; font-weight: 500; letter-spacing: 0.02em; color: var(--text-tertiary);
+            margin-top: 6px; text-transform: uppercase; }
+
+        /* Educación en Valores: título y subtítulo con la misma tipografía y en azul */
+        .hub-card--valores .hub-card-title small {
+            font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400;
+            font-size: 0.55em; letter-spacing: -0.01em; text-transform: none;
+            color: var(--section-color); margin-top: 4px;
+        }
+
+        .hub-card-photo {
+            position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
+            background: var(--section-bg, linear-gradient(135deg, #ddd, #bbb));
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hub-card-photo img {
+            width: 100%; height: 100%; object-fit: cover; object-position: center;
+            transition: transform 0.5s ease;
+        }
+        .hub-card-photo video {
+            width: 100%; height: 100%; object-fit: contain; object-position: center;
+            transition: transform 0.5s ease;
+        }
+        a.hub-card:hover .hub-card-photo img,
+        a.hub-card:hover .hub-card-photo video { transform: scale(1.045); }
+        .hub-card-photo-placeholder {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 10px; color: rgba(255,255,255,0.92);
+        }
+        .hub-card-photo-placeholder .ph-icon { font-size: 46px; font-family: 'Instrument Serif', serif; }
+        .hub-card-photo-placeholder .ph-text { font-size: 12.5px; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.9; }
+
+        .hub-card-arrow {
+            position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%;
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center; font-size: 17px; z-index: 2;
+            color: var(--text-primary); opacity: 0; transform: translateX(-4px);
+            transition: all 0.25s ease;
+        }
+        a.hub-card:hover .hub-card-arrow { opacity: 1; transform: translateX(0); }
+
+        .hub-card-tag {
+            position: absolute; top: 16px; left: 16px; z-index: 2;
+            display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600;
+            color: #8a5c1e; background: rgba(255,255,255,0.92); padding: 5px 12px;
+            border-radius: 20px; box-shadow: var(--shadow-md);
+        }
+
+        .video-mute-btn {
+            position: absolute; bottom: 12px; right: 12px; z-index: 3;
+            width: 34px; height: 34px; border-radius: 50%; border: none;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-size: 15px; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .video-mute-btn:hover { background: rgba(0,0,0,0.7); transform: scale(1.08); }
+
+        /* colores por sección */
+        .hub-card--historia { --section-color: #C1573A; --section-bg: linear-gradient(135deg, #E7A084 0%, #B85A3A 60%, #7A3A22 100%); }
+        .hub-card--primero  { --section-color: #2F8A55; --section-bg: linear-gradient(135deg, #7FC79A 0%, #2F8A55 60%, #1D5B37 100%); }
+        .hub-card--valores  { --section-color: #2563A8; --section-bg: linear-gradient(135deg, #7FAEDD 0%, #2563A8 60%, #16406F 100%); }
+        .hub-card--psicologia { --section-color: #1D7A8C; --section-bg: linear-gradient(135deg, #7FCFDB 0%, #1D7A8C 60%, #0F4A56 100%); }
+        .hub-card--digital  { --section-color: #6B4FA0; --section-bg: linear-gradient(135deg, #B79EE0 0%, #6B4FA0 60%, #402C63 100%); }
+
+        /* FOOTER */
+        .footer { max-width: 1280px; margin: 0 auto; padding: 24px 20px; border-top: 1px solid var(--border); text-align: center; }
+        .footer p { font-size: 13px; color: var(--text-tertiary); }
+
+        /* RESPONSIVE */
+        @media (max-width: 760px) {
+            .hub-grid { grid-template-columns: 1fr; gap: 22px; }
+            .main { padding: 40px 16px 70px; }
+        }
+        @media (max-width: 560px) {
+            .logo-text { white-space: normal; }
+            .logo-sub { border-left: none; padding-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-video">
+        <video autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+            <source src="videos/header-retrato.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="header-inner">
+        <div class="logo-area">
+            <div class="logo-icon">φ</div>
+            <span class="logo-text"><span class="lt-red">Materiales</span><span class="lt-gold">de Filosofía</span></span>
+            <span class="logo-sub">Filoalquipir</span>
+        </div>
+    </div>
+    <audio id="bgAudio" loop preload="auto">
+        <source src="audio/musica-fondo.mp3" type="audio/mpeg">
+    </audio>
+    <div class="header-right">
+        <span class="header-logo-badge header-logo-badge--alquipir"><img src="img/logo-alquipir.png" alt="IES Alquipir"></span>
+        <span class="header-logo-badge"><img src="img/logo-murcia.png" alt="Región de Murcia"></span>
+        <button type="button" id="bgAudioBtn" class="bg-audio-btn" aria-label="Detener música de fondo" onclick="toggleBgAudio()">🔊</button>
+        <div id="audioHint" class="audio-hint">🔊 Toca para activar el sonido</div>
+    </div>
+</header>
+
+<main class="main">
+    <div class="hub-grid">
+
+        <!-- 1. Historia de la Filosofía — 2º de Bachillerato (publicada) -->
+        <a class="hub-card hub-card--historia" href="https://pacofilo.github.io/Historia-de-la-filosofia-indice/" target="_blank">
+            <div class="hub-card-head">
+                <h2 class="hub-card-title">Historia de la Filosofía<small>2º de Bachillerato</small></h2>
+            </div>
+            <div class="hub-card-photo">
+                <video autoplay muted loop playsinline preload="metadata" aria-label="Filósofos: Platón, Aristóteles, Descartes, Kant, Nietzsche...">
+                    <source src="videos/historia-filosofia.mp4" type="video/mp4">
+                </video>
+                <span class="hub-card-arrow">→</span>
+            </div>
+        </a>
+
+        <!-- 2. Filosofía — 1º de Bachillerato (pendiente de publicar) -->
+        <div class="hub-card hub-card--primero is-pending">
+            <div class="hub-card-head">
+                <h2 class="hub-card-title">Filosofía<small>1º de Bachillerato</small></h2>
+            </div>
+            <div class="hub-card-photo">
+                <span class="hub-card-tag">🚧 Próximamente</span>
+                <video autoplay muted loop playsinline preload="metadata" aria-label="Filosofía de 1º de Bachillerato">
+                    <source src="videos/filosofia-1-bachillerato.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <!-- 3. Educación en valores cívicos y éticos — 2º E.S.O (pendiente de publicar) -->
+        <div class="hub-card hub-card--valores is-pending">
+            <div class="hub-card-head">
+                <h2 class="hub-card-title">Educación en Valores<small>Cívicos y Éticos · 2º E.S.O.</small></h2>
+            </div>
+            <div class="hub-card-photo">
+                <span class="hub-card-tag">🚧 Próximamente</span>
+                <video autoplay muted loop playsinline preload="metadata" aria-label="Educación en valores cívicos y éticos">
+                    <source src="videos/valores-civicos.mp4" type="video/mp4">
+                </video>
+                <button type="button" class="video-mute-btn" aria-label="Activar sonido" onclick="event.preventDefault(); event.stopPropagation(); toggleSound(this);">🔇</button>
+            </div>
+        </div>
+
+        <!-- 4. Psicología (pendiente de publicar) -->
+        <div class="hub-card hub-card--psicologia is-pending">
+            <div class="hub-card-head">
+                <h2 class="hub-card-title">Psicología</h2>
+            </div>
+            <div class="hub-card-photo">
+                <span class="hub-card-tag">🚧 Próximamente</span>
+                <video autoplay muted loop playsinline preload="metadata" aria-label="Psicología">
+                    <source src="videos/psicologia.mp4" type="video/mp4">
+                </video>
+                <button type="button" class="video-mute-btn" aria-label="Activar sonido" onclick="event.preventDefault(); event.stopPropagation(); toggleSound(this);">🔇</button>
+            </div>
+        </div>
+
+        <!-- 5. Arquitecto digital (pendiente de publicar) -->
+        <div class="hub-card hub-card--digital is-pending">
+            <div class="hub-card-head">
+                <h2 class="hub-card-title">Arquitecto Digital</h2>
+            </div>
+            <div class="hub-card-photo">
+                <span class="hub-card-tag">🚧 Próximamente</span>
+                <video autoplay muted loop playsinline preload="metadata" aria-label="Arquitecto Digital">
+                    <source src="videos/arquitecto-digital.mp4" type="video/mp4">
+                </video>
+                <button type="button" class="video-mute-btn" aria-label="Activar sonido" onclick="event.preventDefault(); event.stopPropagation(); toggleSound(this);">🔇</button>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+<footer class="footer">
+    <p>Materiales elaborados por Francisco Jiménez Amor · Dpto. de Filosofía · IES Alquipir de Cehegín</p>
+</footer>
+
+
+<script>
+// Activa/desactiva el sonido de un vídeo (silenciado por defecto) y silencia
+// automáticamente los demás vídeos con botón de sonido de la página.
+function toggleSound(btn) {
+    const video = btn.previousElementSibling;
+    if (!video || video.tagName !== 'VIDEO') return;
+    const willUnmute = video.muted;
+    if (willUnmute) {
+        document.querySelectorAll('.video-mute-btn').forEach((otherBtn) => {
+            if (otherBtn === btn) return;
+            const otherVideo = otherBtn.previousElementSibling;
+            if (otherVideo && otherVideo.tagName === 'VIDEO' && !otherVideo.muted) {
+                otherVideo.muted = true;
+                otherBtn.textContent = '🔇';
+                otherBtn.setAttribute('aria-label', 'Activar sonido');
+            }
+        });
+    }
+    video.muted = !video.muted;
+    btn.textContent = video.muted ? '🔇' : '🔊';
+    btn.setAttribute('aria-label', video.muted ? 'Activar sonido' : 'Silenciar sonido');
+    syncBgAudio();
+}
+
+// Música de fondo: suena por defecto, se detiene sola en cuanto se activa el
+// sonido de cualquier vídeo de una tarjeta, y vuelve a sonar en cuanto se
+// silencian todos. El botón de la cabecera permite detenerla/reanudarla a mano.
+const bgAudio = document.getElementById('bgAudio');
+const bgAudioBtn = document.getElementById('bgAudioBtn');
+let bgAudioManuallyOff = false;
+
+function anyCardAudioOn() {
+    return Array.from(document.querySelectorAll('.hub-card-photo video')).some((v) => !v.muted);
+}
+
+function updateBgAudioBtnUI() {
+    if (!bgAudioBtn) return;
+    // El icono refleja la intención (activa por defecto), no el .paused real del
+    // elemento: el navegador puede bloquear el autoplay con sonido hasta el primer
+    // gesto del usuario, pero el botón debe mostrarse ya activado desde el principio.
+    const shouldBeSounding = !bgAudioManuallyOff && !anyCardAudioOn();
+    bgAudioBtn.textContent = shouldBeSounding ? '🔊' : '🔇';
+    bgAudioBtn.setAttribute('aria-label', shouldBeSounding ? 'Detener música de fondo' : 'Reproducir música de fondo');
+}
+
+function syncBgAudio() {
+    if (!bgAudio) return;
+    if (bgAudioManuallyOff || anyCardAudioOn()) {
+        if (!bgAudio.paused) bgAudio.pause();
+    } else if (bgAudio.paused) {
+        bgAudio.play().catch(() => { /* el navegador bloqueó el autoplay; se reintentará con el primer gesto del usuario */ });
+    }
+    updateBgAudioBtnUI();
+}
+
+function toggleBgAudio() {
+    bgAudioManuallyOff = !bgAudioManuallyOff;
+    syncBgAudio();
+}
+
+// Aviso "Toca para activar el sonido": el navegador bloquea el autoplay con
+// sonido hasta el primer gesto del usuario, así que se muestra solo mientras
+// la música debería sonar pero sigue en pausa, y desaparece en cuanto se toca
+// la página (momento en el que syncBgAudio() consigue reproducirla).
+function updateAudioHint() {
+    const hint = document.getElementById('audioHint');
+    if (!hint || !bgAudio) return;
+    const blocked = bgAudio.paused && !bgAudioManuallyOff && !anyCardAudioOn();
+    hint.classList.toggle('show', blocked);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    syncBgAudio();
+    updateAudioHint();
+});
+['click', 'keydown', 'touchstart'].forEach((evt) => {
+    document.addEventListener(evt, function firstGesture() {
+        syncBgAudio();
+        updateAudioHint();
+    }, { once: true });
+});
+</script>
+
+</body>
+</html>
